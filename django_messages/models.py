@@ -13,3 +13,11 @@ class Conversation(models.Model):
 		else:
 			return self.name
 
+class Message(models.Model):
+	conversation = models.ForeignKey(Conversation,on_delete=models.CASCADE)
+	from_user = models.ForeignKey(User,on_delete=models.CASCADE)
+	content = models.TextField()
+
+	def __str__(self):
+		return "{} - {}".format(self.conversation,self.from_user)
+		
