@@ -34,3 +34,8 @@ class DeleteMessage(DeleteView):
 			message = self.get_object()
 			default_success_url = reverse("CreateMessage",args=(message.conversation.id,))
 			return default_success_url
+	def delete(self):
+		message = self.get_object()
+		message.deleted = True
+		message.save()
+		return HttpResponseRedirect(success_url)
